@@ -1,35 +1,24 @@
 <template>
   <v-app id="inspire">
-    <Aside :drawer="drawer"/>
-    <Header @toggleAside="toggleAside"/>
+    <MainMenu />
+    <Header />
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="indigo" app>
-      <span class="white--text">&copy; 2017</span>
+    <v-footer color="pink" app>
+      <span class="white--text">&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import Aside from './components/Aside'
+import MainMenu from './components/MainMenu'
 import Header from './components/Header'
 
 export default {
-  data: () => ({
-    drawer: false
-  }),
   components: {
-    Aside,
+    MainMenu,
     Header
-  },
-  props: {
-    source: String
-  },
-  methods: {
-    toggleAside () {
-      this.drawer = !this.drawer;
-    }
   }
 }
 </script>
