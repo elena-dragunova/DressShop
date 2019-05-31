@@ -19,6 +19,9 @@ export default {
   components: {
     MainMenu,
     Header
+  },
+  created () {
+    this.$store.dispatch('getCatalogItems')
   }
 }
 </script>

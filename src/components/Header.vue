@@ -2,7 +2,7 @@
   <v-toolbar color="pink" dark fixed app>
     <v-toolbar-side-icon @click.stop="toggleMenu" class="hidden-sm-and-up"></v-toolbar-side-icon>
     <v-toolbar-title>
-      <router-link to="/" class="link-btn">DressShop</router-link>
+      <router-link to="/" class="link-btn">Fashion</router-link>
     </v-toolbar-title>
     <v-menu :nudge-width="100">
       <template v-slot:activator="{ on }">
@@ -34,6 +34,13 @@
     <v-btn class="hidden-xs-only" flat>
       <router-link to="/signup" class="link-btn">Signup</router-link>
     </v-btn>
+    <v-btn class="hidden-xs-only cart-btn" flat>
+      <router-link to="/cart" class="link-btn">
+        <i class="material-icons">
+          shopping_cart
+        </i>
+      </router-link>
+    </v-btn>
   </v-toolbar>
 </template>
 
@@ -64,5 +71,10 @@ export default {
     text-decoration: none;
     color: inherit;
     font: inherit;
+  }
+
+  .cart-btn {
+    padding: 0 10px;
+    min-width: auto;
   }
 </style>

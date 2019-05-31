@@ -17,7 +17,7 @@
           </v-btn>
         </v-flex>
         <v-flex md10>
-          <h2 class="menu-title">DressShop</h2>
+          <h2 class="menu-title">Fashion</h2>
         </v-flex>
         <v-flex md1 class="main-menu-right">
           <v-btn color="pink"
