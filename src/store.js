@@ -25,6 +25,9 @@ export default new Vuex.Store({
     displayMenu (state) {
       state.displayMenu = !state.displayMenu
     },
+    closeMenu (state) {
+      state.displayMenu = false;
+    },
     storeCatalog (state, catalog) {
       state.catalogItems = catalog
     },
@@ -36,15 +39,17 @@ export default new Vuex.Store({
     displayMenu ({ commit }) {
       commit('displayMenu')
     },
+    closeMenu({commit}) {
+      commit('closeMenu')
+    },
     getCatalogItems ({ commit }) {
       axios.get('/catalog.json')
         .then(res => {
-          console.log(res)
           commit('storeCatalog', res.data)
 
           const categories = []
           res.data.forEach(item => {
-            if (categories.indexOf(item.category) >= 0) {
+            if (categories.indexOf(item.category) === -1) {
               categories.push(item.category)
             }
           })
