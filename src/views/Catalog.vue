@@ -9,7 +9,7 @@
         <v-layout row wrap>
           <v-flex xs6 md4
                   pa-1
-                  v-for="(item, index) in catalog"
+                  v-for="(item, index) in selectedItems"
                   :key="index">
             <v-card class="catalog-card">
               <div>
@@ -28,7 +28,6 @@
             </v-card>
           </v-flex>
         </v-layout>
-        <div>{{ catalog }}</div>
       </v-flex>
     </v-layout>
   </v-container>
@@ -44,6 +43,9 @@ export default {
   computed: {
     catalog () {
       return this.$store.getters.getAllCatalogItems
+    },
+    selectedItems () {
+      return this.$store.getters.getSelectedItems
     }
   }
 }

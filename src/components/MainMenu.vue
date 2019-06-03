@@ -102,7 +102,7 @@ export default {
       return this.$store.getters.showMenu
     },
     categories () {
-      return this.$store.getters.getCategoties
+      return this.$store.getters.getCategories
     }
   },
   methods: {
@@ -146,6 +146,7 @@ export default {
 
   .menu-link {
     text-decoration: none;
+    text-transform: capitalize;
     color: $blue-grey;
   }
 

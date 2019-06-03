@@ -48,7 +48,7 @@
 export default {
   computed: {
     categories () {
-      return this.$store.getters.getCategoties
+      return this.$store.getters.getCategories
     }
   },
   methods: {
@@ -63,8 +63,9 @@ export default {
   @import "@/styles/variables.scss";
 
   .menu-link {
-    text-decoration: none !important;
-    color: $blue-grey !important;
+    text-decoration: none;
+    text-transform: capitalize;
+    color: $blue-grey;
   }
 
   .link-btn {

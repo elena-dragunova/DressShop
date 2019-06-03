@@ -8,17 +8,21 @@ export default new Vuex.Store({
   state: {
     displayMenu: false,
     categories: [],
-    catalogItems: []
+    catalogItems: [],
+    selectedItems: []
   },
   getters: {
     showMenu (state) {
       return state.displayMenu
     },
-    getCategoties (state) {
+    getCategories (state) {
       return state.categories
     },
     getAllCatalogItems (state) {
       return state.catalogItems
+    },
+    getSelectedItems (state) {
+      return state.selectedItems
     }
   },
   mutations: {
@@ -33,6 +37,14 @@ export default new Vuex.Store({
     },
     storeCategories (state, categories) {
       state.categories = categories
+    },
+    getItemsByCategory (state, category) {
+      state.selectedItems =  state.catalogItems.filter( item => {
+        return item.category === category;
+      })
+    },
+    selectAllItems (state) {
+      state.selectedItems = state.catalogItems
     }
   },
   actions: {
@@ -58,6 +70,12 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    getItemsByCategory ({ commit }, category) {
+      commit('getItemsByCategory', category)
+    },
+    selectAllItems({commit}) {
+      commit('selectAllItems')
     }
   }
 })
