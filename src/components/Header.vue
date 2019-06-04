@@ -17,8 +17,8 @@
           v-for="item in categories"
           :key="item"
         >
-          <v-list-tile-title>
-            <router-link to="/catalog" class="menu-link">{{ item }}</router-link>
+          <v-list-tile-title class="menu-btn">
+            <v-btn flat class="menu-link" @click="showCatalogCategory(item)">{{ item }}</v-btn>
           </v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -54,6 +54,10 @@ export default {
   methods: {
     toggleMenu () {
       this.$store.dispatch('displayMenu')
+    },
+    showCatalogCategory(cat) {
+      this.$store.dispatch('getItemsByCategory', cat);
+      this.$router.push({name: 'catalog'});
     }
   }
 }
@@ -77,5 +81,9 @@ export default {
   .cart-btn {
     padding: 0 10px;
     min-width: auto;
+  }
+
+  .menu-btn {
+    height: auto;
   }
 </style>

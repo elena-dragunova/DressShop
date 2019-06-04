@@ -48,8 +48,8 @@
               :key="item"
             >
               <v-list-tile-content>
-                <v-list-tile-title>
-                  <router-link to="/catalog" class="menu-link">{{ item }}</router-link>
+                <v-list-tile-title class="menu-link-wrapper">
+                  <v-btn flat class="menu-link" @click="showCatalogCategory(item)">{{ item }}</v-btn>
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -108,6 +108,11 @@ export default {
   methods: {
     toggleMenu () {
       this.$store.dispatch('displayMenu')
+    },
+    showCatalogCategory(cat) {
+      this.$store.dispatch('getItemsByCategory', cat);
+      this.$router.push({name: 'catalog'});
+      this.$store.dispatch('closeMenu');
     }
   }
 }
@@ -154,5 +159,9 @@ export default {
     text-decoration: none;
     color: inherit;
     font: inherit;
+  }
+
+  .menu-link-wrapper {
+    height: auto;
   }
 </style>

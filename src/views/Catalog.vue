@@ -47,7 +47,7 @@ export default {
     selectedItems () {
       return this.$store.getters.getSelectedItems
     }
-  }
+  },
 }
 </script>
 
