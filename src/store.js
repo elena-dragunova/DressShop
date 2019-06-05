@@ -86,11 +86,9 @@ export default new Vuex.Store({
       commit('selectAllItems')
     },
     getCurrentItem({commit, state}, id) {
-      console.log(state.catalogItems)
       const current = state.catalogItems.filter(item => {
         return item.id === id;
       })
-      console.log(current)
       commit('storeCurrent', current);
     }
   }

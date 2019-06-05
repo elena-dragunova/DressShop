@@ -8,10 +8,9 @@
         <p class="catalog-item-price">Price: {{ catalogItem.price }}$</p>
       </v-flex>
 
-      <v-flex md4>
+      <v-flex md4 pt-5>
         <div class="catalog-item-sizes">
           <v-btn flat v-for="size in getSizes">{{ size }}</v-btn>
-          <p>{{ getSizes }}</p>
         </div>
       </v-flex>
     </v-layout>
@@ -25,7 +24,9 @@
         return this.$store.getters.getCurrentItem
       },
       getSizes () {
-        console.log(this.catalogItem.sizes)
+        return Object.keys(this.catalogItem.sizes).filter(size => {
+          return this.catalogItem.sizes[size] === true
+        })
       }
     },
     created() {
