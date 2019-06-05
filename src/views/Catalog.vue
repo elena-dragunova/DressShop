@@ -21,7 +21,9 @@
               </div>
 
               <v-card-actions>
-                <v-btn flat color="pink">More</v-btn>
+                <v-btn flat color="pink">
+                  <router-link :to="'/catalog/' + item.id" class="link-btn">More</router-link>
+                </v-btn>
                 <v-spacer />
                 <v-btn color="pink" dark>Buy</v-btn>
               </v-card-actions>
@@ -83,5 +85,11 @@ export default {
     border-radius: 20px;
     background-color: #CFD8DC;
     text-transform: uppercase;
+  }
+
+  .link-btn {
+    text-decoration: none;
+    color: inherit;
+    font: inherit;
   }
 </style>

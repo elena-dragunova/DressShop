@@ -9,7 +9,8 @@ export default new Vuex.Store({
     displayMenu: false,
     categories: [],
     catalogItems: [],
-    selectedItems: []
+    selectedItems: [],
+    currentItem: {}
   },
   getters: {
     showMenu (state) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     getSelectedItems (state) {
       return state.selectedItems
+    },
+    getCurrentItem (state) {
+      return state.currentItem[0]
     }
   },
   mutations: {
@@ -45,6 +49,9 @@ export default new Vuex.Store({
     },
     selectAllItems (state) {
       state.selectedItems = state.catalogItems
+    },
+    storeCurrent(state, current) {
+      state.currentItem = current
     }
   },
   actions: {
@@ -77,6 +84,14 @@ export default new Vuex.Store({
     },
     selectAllItems({commit}) {
       commit('selectAllItems')
+    },
+    getCurrentItem({commit, state}, id) {
+      console.log(state.catalogItems)
+      const current = state.catalogItems.filter(item => {
+        return item.id === id;
+      })
+      console.log(current)
+      commit('storeCurrent', current);
     }
   }
 })
