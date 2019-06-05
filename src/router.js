@@ -5,6 +5,7 @@ import About from './views/About.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import Catalog from './views/Catalog.vue'
+import CatalogItem from './views/CatalogItem.vue'
 import Cart from './views/Cart.vue'
 import Contacts from './views/Contacts.vue'
 
@@ -38,6 +39,11 @@ export default new Router({
       path: '/catalog',
       name: 'catalog',
       component: Catalog
+    },
+    {
+      path: '/catalog/:id',
+      name: 'catalog-item',
+      component: CatalogItem
     },
     {
       path: '/cart',

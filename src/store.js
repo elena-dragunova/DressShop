@@ -58,6 +58,7 @@ export default new Vuex.Store({
       axios.get('/catalog.json')
         .then(res => {
           commit('storeCatalog', res.data)
+          commit('selectAllItems')
 
           const categories = []
           res.data.forEach(item => {
