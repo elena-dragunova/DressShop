@@ -3,11 +3,15 @@
     <v-layout row>
       <v-flex md8 class="catalog-item">
         <h2 class="catalog-item-title">{{ catalogItem.name }}</h2>
-        <span v-if="catalogItem.new" class="new-label">New!</span>
-        <v-img :src="catalogItem.imageUrl" aspect-ratio="0.8" />
+        <span v-if="catalogItem.new"
+              class="new-label">New!</span>
+        <v-img :src="catalogItem.imageUrl"
+               aspect-ratio="0.8" />
       </v-flex>
 
-      <v-flex md4 mt-5 pt-5>
+      <v-flex md4
+              mt-5
+              pt-5>
         <h4 class="sizes-title">Available sizes:</h4>
         <div class="catalog-item-sizes">
           <v-btn flat
@@ -25,8 +29,11 @@
                           @decrease="decreaseQuantity"/>
 
           <div class="buyButtons">
-            <v-btn class="buyBtn white--text" color="#F06292">Add to Cart</v-btn>
-            <v-btn flat class="cancelBtn" @click="cancelChoice">Cancel</v-btn>
+            <v-btn class="buyBtn white--text"
+                   color="#F06292"
+                   @click="addToCart">Add to Cart</v-btn>
+            <v-btn flat class="cancelBtn"
+                   @click="cancelChoice">Cancel</v-btn>
           </div>
 
         </div>
@@ -57,6 +64,9 @@
         return Object.keys(this.catalogItem.sizes).filter(size => {
           return this.catalogItem.sizes[size] === true
         })
+      },
+      getCartItems() {
+        return this.$store.getters.cartItems
       }
     },
     methods: {
@@ -69,6 +79,14 @@
       decreaseQuantity () {
         this.quantity--;
       },
+      addToCart() {
+        const cartItem = this.catalogItem;
+
+        cartItem.quantity = this.quantity;
+        cartItem.size = this.chosenSize;
+
+        this.$store.dispatch('addItemToCart', cartItem)
+      }
     },
     created() {
       this.$store.dispatch('getCurrentItem', this.$route.params.id)

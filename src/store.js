@@ -10,7 +10,8 @@ export default new Vuex.Store({
     categories: [],
     catalogItems: [],
     selectedItems: [],
-    currentItem: {}
+    currentItem: {},
+    cartItems: [],
   },
   getters: {
     showMenu (state) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     getCurrentItem (state) {
       return state.currentItem[0]
+    },
+    getCartItems (state) {
+      return state.cartItems;
     }
   },
   mutations: {
@@ -52,6 +56,9 @@ export default new Vuex.Store({
     },
     storeCurrent(state, current) {
       state.currentItem = current
+    },
+    addItemToCart(state, item) {
+      state.cartItems.push(item)
     }
   },
   actions: {
@@ -90,6 +97,9 @@ export default new Vuex.Store({
         return item.id === id;
       })
       commit('storeCurrent', current);
+    },
+    addItemToCart({commit}, item) {
+      commit('addItemToCart', item)
     }
   }
 })
