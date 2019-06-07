@@ -83,7 +83,7 @@ export default {
     color: $black;
     font-size: 12px;
     border-radius: 20px;
-    background-color: #CFD8DC;
+    background-color: $light-grey;
     text-transform: uppercase;
   }
 
