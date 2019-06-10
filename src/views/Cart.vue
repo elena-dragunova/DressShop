@@ -37,27 +37,35 @@
 
       <form v-if="isFormVisible" class="order-form mt-4">
         <v-layout row wrap>
-          <v-flex xs6 pa-3>
+          <v-flex xs6 px-3>
             <v-text-field label="Your Name *"
-                          color="#37474F"/>
+                          color="#37474F"
+                          v-model="$v.name.$model"
+                          :class="{'error-field': $v.name.$error}"/>
           </v-flex>
 
-          <v-flex xs6 pa-3>
+          <v-flex xs6 px-3>
             <v-text-field label="Your Email *"
-                          color="#37474F"/>
+                          color="#37474F"
+                          v-model="$v.email.$model"
+                          :class="{'error-field': $v.email.$error}"/>
           </v-flex>
 
-          <v-flex xs6 pa-3>
+          <v-flex xs6 px-3>
             <v-text-field label="Your Phone *"
-                          color="#37474F"/>
+                          color="#37474F"
+                          v-model="$v.phone.$model"
+                          :class="{'error-field': $v.phone.$error}"/>
           </v-flex>
 
-          <v-flex xs6 pa-3>
+          <v-flex xs6 px-3>
             <v-text-field label="Your Address *"
-                          color="#37474F"/>
+                          color="#37474F"
+                          v-model="$v.address.$model"
+                          :class="{'error-field': $v.address.$error}"/>
           </v-flex>
 
-          <v-flex xs12 pa2>
+          <v-flex xs12>
             <v-btn color="#F06292"
                    class="white--text">Send</v-btn>
             <v-btn color="#F06292"
@@ -72,10 +80,16 @@
 </template>
 
 <script>
+import { required, email } from 'vuelidate/lib/validators'
+
 export default {
   data () {
     return {
       isFormVisible: true,
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
       headers: [
         {
           text: 'Name',
@@ -88,6 +102,21 @@ export default {
         { text: 'Price', value: 'sumPrice' },
         { sortable: false, value: 'delete' }
       ]
+    }
+  },
+  validations: {
+    name: {
+      required
+    },
+    email: {
+      required,
+      email
+    },
+    phone: {
+      required
+    },
+    address: {
+      required
     }
   },
   methods: {
@@ -123,5 +152,14 @@ export default {
 
 .total-price {
   font-size: 18px;
+}
+
+form .v-text-field.error-field label {
+  color: red;
+  }
+
+form .v-text-field.error-field .v-input__slot::after,
+form .v-text-field.error-field .v-input__slot::before {
+  border-color: red !important;
 }
 </style>
