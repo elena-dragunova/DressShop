@@ -21,11 +21,10 @@
               </div>
 
               <v-card-actions>
+                <v-spacer />
                 <v-btn flat color="pink">
                   <router-link :to="'/catalog/' + item.id" class="link-btn">More</router-link>
                 </v-btn>
-                <v-spacer />
-                <v-btn color="pink" dark>Buy</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

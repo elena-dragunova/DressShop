@@ -30,8 +30,21 @@ export default new Vuex.Store({
       return state.currentItem[0]
     },
     getCartItems (state) {
-      console.log('getter: ' + state.cartItems)
       return state.cartItems
+    },
+    getTotalPrice (state) {
+      let total = 0
+      state.cartItems.forEach(item => {
+        total += item.sumPrice
+      })
+      return total
+    },
+    getTotalQuantity (state) {
+      let quantity = 0
+      state.cartItems.forEach(item => {
+        quantity += item.quantity
+      })
+      return quantity
     }
   },
   mutations: {
@@ -59,8 +72,19 @@ export default new Vuex.Store({
       state.currentItem = current
     },
     addItemToCart (state, item) {
-      state.cartItems.push(item)
-      console.log(state.cartItems)
+      const added = state.cartItems.find(cartItem => cartItem.id === item.id)
+      if (!added) {
+        state.cartItems.push(item)
+      } else {
+        added.quantity += item.quantity
+        added.sumPrice += item.sumPrice
+      }
+    },
+    deleteItemById (state, id) {
+      const itemToDelete = state.cartItems.find(cartItem => cartItem.id === id)
+      if (itemToDelete) {
+        state.cartItems.splice(state.cartItems.indexOf(itemToDelete), 1)
+      }
     }
   },
   actions: {
@@ -102,6 +126,9 @@ export default new Vuex.Store({
     },
     addItemToCart ({ commit }, item) {
       commit('addItemToCart', item)
+    },
+    deleteItem ({ commit }, id) {
+      commit('deleteItemById', id)
     }
   }
 })

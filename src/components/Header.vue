@@ -35,17 +35,17 @@
       <router-link to="/signup" class="link-btn">Signup</router-link>
     </v-btn>
     <v-btn class="hidden-xs-only cart-btn" flat>
-      <router-link to="/cart" class="link-btn">
-        <i class="material-icons">
-          shopping_cart
-        </i>
-      </router-link>
+      <CartIcon />
     </v-btn>
   </v-toolbar>
 </template>
 
 <script>
+import CartIcon from '../components/CartIcon.vue'
 export default {
+  components: {
+    CartIcon
+  },
   computed: {
     categories () {
       return this.$store.getters.getCategories

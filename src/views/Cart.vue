@@ -15,16 +15,20 @@
           <td>{{ props.item.quantity }}</td>
           <td>{{ props.item.sumPrice }}</td>
           <td>
-            <v-btn>Delete</v-btn>
+            <v-btn @click="deleteItem(props.item.id)">Delete</v-btn>
           </td>
         </template>
       </v-data-table>
 
-      <h4 class="mt-3 text-xs-right total-price">Total Price: {{ getTotalPrice }}$</h4>
+      <h4 class="mt-3 text-xs-right total-price">
+        Total Price: {{ getTotalPrice }}$
+      </h4>
 
       <v-flex>
         <v-btn color="#F06292" class="white--text">Send Order</v-btn>
-        <v-btn color="#F06292" flat>Back To Catalog</v-btn>
+        <v-btn color="#F06292" flat @click="backToCatalog"
+          >Back To Catalog</v-btn
+        >
       </v-flex>
     </v-layout>
   </v-container>
@@ -48,23 +52,32 @@ export default {
       ]
     }
   },
+  methods: {
+    backToCatalog () {
+      this.$router.push({ name: 'catalog' })
+      this.$store.dispatch('selectAllItems')
+    },
+    deleteItem (id) {
+      this.$store.dispatch('deleteItem', id)
+    }
+  },
   computed: {
     getCartItems () {
       return this.$store.getters.getCartItems
     },
     getTotalPrice () {
-      return 200
+      return this.$store.getters.getTotalPrice
     }
   }
 }
 </script>
 
 <style lang="scss">
-  .cart-table table.v-table thead th {
-    font-size: 16px;
-  }
+.cart-table table.v-table thead th {
+  font-size: 16px;
+}
 
-  .total-price {
-    font-size: 18px;
-  }
+.total-price {
+  font-size: 18px;
+}
 </style>

@@ -23,11 +23,7 @@
           <v-btn color="pink"
                  flat="flat"
                  class="menu-btn">
-            <router-link to="cart" class="link-btn">
-              <i class="material-icons">
-                shopping_cart
-              </i>
-            </router-link>
+            <CartIcon />
           </v-btn>
         </v-flex>
       </v-layout>
@@ -96,7 +92,11 @@
 </template>
 
 <script>
+import CartIcon from '../components/CartIcon.vue'
 export default {
+  components: {
+    CartIcon
+  },
   computed: {
     menu () {
       return this.$store.getters.showMenu
@@ -109,10 +109,10 @@ export default {
     toggleMenu () {
       this.$store.dispatch('displayMenu')
     },
-    showCatalogCategory(cat) {
-      this.$store.dispatch('getItemsByCategory', cat);
-      this.$router.push({name: 'catalog'});
-      this.$store.dispatch('closeMenu');
+    showCatalogCategory (cat) {
+      this.$store.dispatch('getItemsByCategory', cat)
+      this.$router.push({ name: 'catalog' })
+      this.$store.dispatch('closeMenu')
     }
   }
 }
