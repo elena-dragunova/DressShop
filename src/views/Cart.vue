@@ -25,11 +25,48 @@
       </h4>
 
       <v-flex>
-        <v-btn color="#F06292" class="white--text">Send Order</v-btn>
-        <v-btn color="#F06292" flat @click="backToCatalog"
+        <v-btn color="#F06292"
+               class="white--text"
+               @click="showForm">Send Order</v-btn>
+        <v-btn color="#F06292"
+               flat
+               @click="backToCatalog"
           >Back To Catalog</v-btn
         >
       </v-flex>
+
+      <form v-if="isFormVisible" class="order-form mt-4">
+        <v-layout row wrap>
+          <v-flex xs6 pa-3>
+            <v-text-field label="Your Name *"
+                          color="#37474F"/>
+          </v-flex>
+
+          <v-flex xs6 pa-3>
+            <v-text-field label="Your Email *"
+                          color="#37474F"/>
+          </v-flex>
+
+          <v-flex xs6 pa-3>
+            <v-text-field label="Your Phone *"
+                          color="#37474F"/>
+          </v-flex>
+
+          <v-flex xs6 pa-3>
+            <v-text-field label="Your Address *"
+                          color="#37474F"/>
+          </v-flex>
+
+          <v-flex xs12 pa2>
+            <v-btn color="#F06292"
+                   class="white--text">Send</v-btn>
+            <v-btn color="#F06292"
+                   flat
+                   @click="hideForm">Cancel</v-btn>
+          </v-flex>
+        </v-layout>
+      </form>
+
     </v-layout>
   </v-container>
 </template>
@@ -38,6 +75,7 @@
 export default {
   data () {
     return {
+      isFormVisible: true,
       headers: [
         {
           text: 'Name',
@@ -59,6 +97,12 @@ export default {
     },
     deleteItem (id) {
       this.$store.dispatch('deleteItem', id)
+    },
+    showForm () {
+      this.isFormVisible = true
+    },
+    hideForm () {
+      this.isFormVisible = false
     }
   },
   computed: {

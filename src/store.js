@@ -11,7 +11,8 @@ export default new Vuex.Store({
     catalogItems: [],
     selectedItems: [],
     currentItem: {},
-    cartItems: []
+    cartItems: [],
+    order: {}
   },
   getters: {
     showMenu (state) {
