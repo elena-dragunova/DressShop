@@ -26,21 +26,21 @@
 </template>
 
 <script>
-  export default {
-    computed: {
-      categories () {
-        return this.$store.getters.getCategories
-      }
+export default {
+  computed: {
+    categories () {
+      return this.$store.getters.getCategories
+    }
+  },
+  methods: {
+    getAllItems () {
+      this.$store.dispatch('selectAllItems')
     },
-    methods: {
-      getAllItems () {
-        this.$store.dispatch('selectAllItems')
-      },
-      getItemsByCategory(cat) {
-        return this.$store.dispatch('getItemsByCategory', cat);
-      }
+    getItemsByCategory (cat) {
+      return this.$store.dispatch('getItemsByCategory', cat)
     }
   }
+}
 </script>
 
 <style scoped lang="scss">

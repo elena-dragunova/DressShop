@@ -1,3 +1,7 @@
 <template>
-  <h2>About page</h2>
+  <v-container>
+    <v-layout row>
+      <h1>About page</h1>
+    </v-layout>
+  </v-container>
 </template>

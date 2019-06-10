@@ -11,7 +11,7 @@ export default new Vuex.Store({
     catalogItems: [],
     selectedItems: [],
     currentItem: {},
-    cartItems: [],
+    cartItems: []
   },
   getters: {
     showMenu (state) {
@@ -30,7 +30,8 @@ export default new Vuex.Store({
       return state.currentItem[0]
     },
     getCartItems (state) {
-      return state.cartItems;
+      console.log('getter: ' + state.cartItems)
+      return state.cartItems
     }
   },
   mutations: {
@@ -38,7 +39,7 @@ export default new Vuex.Store({
       state.displayMenu = !state.displayMenu
     },
     closeMenu (state) {
-      state.displayMenu = false;
+      state.displayMenu = false
     },
     storeCatalog (state, catalog) {
       state.catalogItems = catalog
@@ -47,25 +48,26 @@ export default new Vuex.Store({
       state.categories = categories
     },
     getItemsByCategory (state, category) {
-      state.selectedItems =  state.catalogItems.filter( item => {
-        return item.category === category;
+      state.selectedItems = state.catalogItems.filter(item => {
+        return item.category === category
       })
     },
     selectAllItems (state) {
       state.selectedItems = state.catalogItems
     },
-    storeCurrent(state, current) {
+    storeCurrent (state, current) {
       state.currentItem = current
     },
-    addItemToCart(state, item) {
+    addItemToCart (state, item) {
       state.cartItems.push(item)
+      console.log(state.cartItems)
     }
   },
   actions: {
     displayMenu ({ commit }) {
       commit('displayMenu')
     },
-    closeMenu({commit}) {
+    closeMenu ({ commit }) {
       commit('closeMenu')
     },
     getCatalogItems ({ commit }) {
@@ -89,16 +91,16 @@ export default new Vuex.Store({
     getItemsByCategory ({ commit }, category) {
       commit('getItemsByCategory', category)
     },
-    selectAllItems({commit}) {
+    selectAllItems ({ commit }) {
       commit('selectAllItems')
     },
-    getCurrentItem({commit, state}, id) {
+    getCurrentItem ({ commit, state }, id) {
       const current = state.catalogItems.filter(item => {
-        return item.id === id;
+        return item.id === id
       })
-      commit('storeCurrent', current);
+      commit('storeCurrent', current)
     },
-    addItemToCart({commit}, item) {
+    addItemToCart ({ commit }, item) {
       commit('addItemToCart', item)
     }
   }

@@ -1,5 +1,9 @@
 <template>
-  <h1>Home page</h1>
+  <v-container>
+    <v-layout column>
+      <h1>Home page</h1>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

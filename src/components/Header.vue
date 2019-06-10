@@ -55,9 +55,9 @@ export default {
     toggleMenu () {
       this.$store.dispatch('displayMenu')
     },
-    showCatalogCategory(cat) {
-      this.$store.dispatch('getItemsByCategory', cat);
-      this.$router.push({name: 'catalog'});
+    showCatalogCategory (cat) {
+      this.$store.dispatch('getItemsByCategory', cat)
+      this.$router.push({ name: 'catalog' })
     }
   }
 }

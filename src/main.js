@@ -17,5 +17,5 @@ new Vue({
 }).$mount('#app')
 
 router.afterEach((to, from) => {
-  store.dispatch('closeMenu');
+  store.dispatch('closeMenu')
 })
