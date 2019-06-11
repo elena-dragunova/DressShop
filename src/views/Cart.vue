@@ -35,61 +35,20 @@
         >
       </v-flex>
 
-      <form v-if="isFormVisible" class="order-form mt-4">
-        <v-layout row wrap>
-          <v-flex xs6 px-3>
-            <v-text-field label="Your Name *"
-                          color="#37474F"
-                          v-model="$v.name.$model"
-                          :class="{'error-field': $v.name.$error}"/>
-          </v-flex>
-
-          <v-flex xs6 px-3>
-            <v-text-field label="Your Email *"
-                          color="#37474F"
-                          v-model="$v.email.$model"
-                          :class="{'error-field': $v.email.$error}"/>
-          </v-flex>
-
-          <v-flex xs6 px-3>
-            <v-text-field label="Your Phone *"
-                          color="#37474F"
-                          v-model="$v.phone.$model"
-                          :class="{'error-field': $v.phone.$error}"/>
-          </v-flex>
-
-          <v-flex xs6 px-3>
-            <v-text-field label="Your Address *"
-                          color="#37474F"
-                          v-model="$v.address.$model"
-                          :class="{'error-field': $v.address.$error}"/>
-          </v-flex>
-
-          <v-flex xs12>
-            <v-btn color="#F06292"
-                   class="white--text">Send</v-btn>
-            <v-btn color="#F06292"
-                   flat
-                   @click="hideForm">Cancel</v-btn>
-          </v-flex>
-        </v-layout>
-      </form>
+      <OrderForm v-if="isFormVisible"
+                 @close="hideForm"/>
 
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
+import OrderForm from '../components/OrderForm.vue'
 
 export default {
   data () {
     return {
       isFormVisible: true,
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
       headers: [
         {
           text: 'Name',
@@ -104,20 +63,8 @@ export default {
       ]
     }
   },
-  validations: {
-    name: {
-      required
-    },
-    email: {
-      required,
-      email
-    },
-    phone: {
-      required
-    },
-    address: {
-      required
-    }
+  components: {
+    OrderForm
   },
   methods: {
     backToCatalog () {
@@ -152,14 +99,5 @@ export default {
 
 .total-price {
   font-size: 18px;
-}
-
-form .v-text-field.error-field label {
-  color: red;
-  }
-
-form .v-text-field.error-field .v-input__slot::after,
-form .v-text-field.error-field .v-input__slot::before {
-  border-color: red !important;
 }
 </style>
