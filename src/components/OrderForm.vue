@@ -25,7 +25,7 @@
         <v-text-field label="Your Phone *"
                       color="#37474F"
                       v-model="$v.phone.$model"
-                      return-masked-value="true"
+                      :return-masked-value="true"
                       mask="+# ### ### ## ##"
                       :class="{'error-field': $v.phone.$error}"/>
         <p v-if="!$v.phone.required && $v.phone.$error"
@@ -45,7 +45,9 @@
 
       <v-flex xs12>
         <v-btn color="#F06292"
-               class="white--text" :disabled="$v.$invalid">Send</v-btn>
+               class="white--text"
+               :disabled="$v.$invalid"
+               @click="sendOrder">Send</v-btn>
         <v-btn color="#F06292"
                flat
                @click="close">Cancel</v-btn>
@@ -85,6 +87,27 @@ export default {
   methods: {
     close () {
       this.$emit('close')
+    },
+    sendOrder () {
+      const order = {}
+
+      order.items = this.getCart
+      order.user = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        address: this.address
+      }
+      order.total = this.getTotalPrice
+      console.log(order)
+    }
+  },
+  computed: {
+    getCart () {
+      return this.$store.getters.getCartItems
+    },
+    getTotalPrice () {
+      return this.$store.getters.getTotalPrice
     }
   }
 }

@@ -48,7 +48,7 @@ import OrderForm from '../components/OrderForm.vue'
 export default {
   data () {
     return {
-      isFormVisible: true,
+      isFormVisible: false,
       headers: [
         {
           text: 'Name',
