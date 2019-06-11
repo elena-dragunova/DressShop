@@ -89,17 +89,18 @@ export default {
       this.$emit('close')
     },
     sendOrder () {
-      const order = {}
-
-      order.items = this.getCart
-      order.user = {
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-        address: this.address
+      const order = {
+        items: this.getCart,
+        user: {
+          name: this.name,
+          email: this.email,
+          phone: this.phone,
+          address: this.address
+        },
+        total: this.getTotalPrice
       }
-      order.total = this.getTotalPrice
-      console.log(order)
+
+      this.$store.dispatch('sendOrder', order)
     }
   },
   computed: {

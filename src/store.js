@@ -132,6 +132,11 @@ export default new Vuex.Store({
     },
     deleteItem ({ commit }, id) {
       commit('deleteItemByKey', id)
+    },
+    sendOrder ({ commit }, order) {
+      axios.post('/orders.json', order)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
     }
   }
 })
