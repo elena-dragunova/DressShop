@@ -5,6 +5,7 @@
       <v-data-table
         :headers="headers"
         :items="getCartItems"
+        item-key="key"
         class="elevation-1 cart-table mt-5"
         hide-actions
       >
@@ -15,7 +16,7 @@
           <td>{{ props.item.quantity }}</td>
           <td>{{ props.item.sumPrice }}</td>
           <td>
-            <v-btn @click="deleteItem(props.item.id)">Delete</v-btn>
+            <v-btn @click="deleteItem(props.item.key)">Delete</v-btn>
           </td>
         </template>
       </v-data-table>
@@ -71,8 +72,8 @@ export default {
       this.$router.push({ name: 'catalog' })
       this.$store.dispatch('selectAllItems')
     },
-    deleteItem (id) {
-      this.$store.dispatch('deleteItem', id)
+    deleteItem (key) {
+      this.$store.dispatch('deleteItem', key)
     },
     showForm () {
       this.isFormVisible = true

@@ -86,7 +86,6 @@ export default {
       cartItem.quantity = this.quantity
       cartItem.size = this.chosenSize
       cartItem.sumPrice = this.catalogItem.price * this.quantity
-      cartItem.id = this.catalogItem.id + this.chosenSize
 
       this.$store.dispatch('addItemToCart', cartItem)
     }

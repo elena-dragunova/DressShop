@@ -73,16 +73,18 @@ export default new Vuex.Store({
       state.currentItem = current
     },
     addItemToCart (state, item) {
-      const added = state.cartItems.find(cartItem => cartItem.id === item.id)
+      const key = item.id + item.size
+      const added = state.cartItems.find(cartItem => cartItem.key === key)
       if (!added) {
+        item.key = key
         state.cartItems.push(item)
       } else {
         added.quantity += item.quantity
         added.sumPrice += item.sumPrice
       }
     },
-    deleteItemById (state, id) {
-      const itemToDelete = state.cartItems.find(cartItem => cartItem.id === id)
+    deleteItemByKey (state, key) {
+      const itemToDelete = state.cartItems.find(cartItem => cartItem.key === key)
       if (itemToDelete) {
         state.cartItems.splice(state.cartItems.indexOf(itemToDelete), 1)
       }
@@ -129,7 +131,7 @@ export default new Vuex.Store({
       commit('addItemToCart', item)
     },
     deleteItem ({ commit }, id) {
-      commit('deleteItemById', id)
+      commit('deleteItemByKey', id)
     }
   }
 })
