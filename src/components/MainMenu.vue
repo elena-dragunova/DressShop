@@ -69,7 +69,7 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile>
+          <v-list-tile v-if="!isAuth">
             <v-list-tile-content>
               <v-list-tile-title>
                 <router-link to="/login" class="menu-link">Login</router-link>
@@ -77,10 +77,18 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile>
+          <v-list-tile v-if="!isAuth">
             <v-list-tile-content>
               <v-list-tile-title>
-                <router-link to="/singup" class="menu-link">Signup</router-link>
+                <router-link to="/signup" class="menu-link">Signup</router-link>
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
+          <v-list-tile v-if="isAuth">
+            <v-list-tile-content>
+              <v-list-tile-title class="menu-link-wrapper">
+                <v-btn flat class="menu-link" @click="logout">Logout</v-btn>
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -103,6 +111,9 @@ export default {
     },
     categories () {
       return this.$store.getters.getCategories
+    },
+    isAuth () {
+      return this.$store.getters.isAuthenticated
     }
   },
   methods: {
@@ -113,6 +124,9 @@ export default {
       this.$store.dispatch('getItemsByCategory', cat)
       this.$router.push({ name: 'catalog' })
       this.$store.dispatch('closeMenu')
+    },
+    logout () {
+      this.$store.dispatch('logout')
     }
   }
 }

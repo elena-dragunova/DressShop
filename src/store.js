@@ -267,7 +267,12 @@ export default new Vuex.Store({
           commit('storeUser', users[0])
         })
         .catch(error => console.log(error))
+    },
+    logout ({ commit }) {
+      commit('clearAuthData')
+      localStorage.removeItem('expDate')
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
     }
-
   }
 })

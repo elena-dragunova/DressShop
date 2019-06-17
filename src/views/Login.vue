@@ -47,6 +47,7 @@
         password: this.password
       }
       this.$store.dispatch('login', { email: formData.email, password: formData.password, returnSecureToken: true })
+      this.$router.push({ name: 'home' })
     }
   }
 }

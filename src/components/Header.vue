@@ -38,6 +38,10 @@
            flat>
       <router-link to="/signup" class="link-btn">Signup</router-link>
     </v-btn>
+    <v-btn v-if="isAuth"
+           class="hidden-xs-only"
+           flat
+           @click="logout">Logout</v-btn>
     <v-btn class="hidden-xs-only cart-btn" flat>
       <CartIcon />
     </v-btn>
@@ -65,6 +69,9 @@ export default {
     showCatalogCategory (cat) {
       this.$store.dispatch('getItemsByCategory', cat)
       this.$router.push({ name: 'catalog' })
+    },
+    logout () {
+      this.$store.dispatch('logout')
     }
   }
 }

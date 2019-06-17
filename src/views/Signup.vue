@@ -89,6 +89,7 @@ export default {
       }
 
       this.$store.dispatch('signUp', signUpData)
+      this.$router.push({ name: 'home' })
     }
   }
 }
