@@ -5,20 +5,20 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="pink" app>
-      <span class="white--text">&copy; 2019</span>
-    </v-footer>
+    <Footer />
   </v-app>
 </template>
 
 <script>
 import MainMenu from './components/MainMenu'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 export default {
   components: {
     MainMenu,
-    Header
+    Header,
+    Footer
   },
   created () {
     this.$store.dispatch('getCatalogItems')

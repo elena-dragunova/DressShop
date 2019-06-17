@@ -12,7 +12,8 @@ export default new Vuex.Store({
     selectedItems: [],
     currentItem: {},
     cartItems: [],
-    order: {}
+    order: {},
+    promo: []
   },
   getters: {
     showMenu (state) {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
         quantity += item.quantity
       })
       return quantity
+    },
+    getPromoItems (state) {
+      return state.promo
     }
   },
   mutations: {
@@ -88,6 +92,9 @@ export default new Vuex.Store({
       if (itemToDelete) {
         state.cartItems.splice(state.cartItems.indexOf(itemToDelete), 1)
       }
+    },
+    storePromoItems (state, promo) {
+      state.promo = promo
     }
   },
   actions: {
@@ -137,6 +144,15 @@ export default new Vuex.Store({
       axios.post('/orders.json', order)
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
+    },
+    getPromoItems ({ commit }) {
+      axios.get('/promo.json')
+        .then(res => {
+          commit('storePromoItems', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 })
