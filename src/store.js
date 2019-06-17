@@ -55,8 +55,8 @@ export default new Vuex.Store({
     getPromoItems (state) {
       return state.promo
     },
-    user (store) {
-      return store.user
+    getUser (state) {
+      return state.user
     },
     isAuthenticated (state) {
       return state.idToken !== null
@@ -111,6 +111,7 @@ export default new Vuex.Store({
       state.userId = userData.userId
     },
     storeUser (state, user) {
+      console.log(user)
       state.user = user
     },
     clearAuthData (state) {
@@ -183,7 +184,6 @@ export default new Vuex.Store({
         returnSecureToken: true
       })
         .then(res => {
-          console.log(res)
           commit('authUser', {
             token: res.data.idToken,
             userId: res.data.localId
@@ -195,6 +195,7 @@ export default new Vuex.Store({
           localStorage.setItem('userId', res.data.localId)
           dispatch('storeUser', authData)
           dispatch('setLogoutTimer', res.data.expiresIn)
+          dispatch('fetchUser')
         })
         .catch(error => console.log(error))
     },
@@ -203,7 +204,9 @@ export default new Vuex.Store({
         return
       }
       axios.post('/users.json' + '?auth=' + state.idToken, userData)
-        .then(res => console.log(res))
+        .then(res => {
+          console.log('res ' + res)
+        })
         .catch(error => console.log(error))
     },
     setLogoutTimer ({ commit }, expirationTime) {
@@ -211,14 +214,13 @@ export default new Vuex.Store({
         commit('clearAuthData')
       }, expirationTime * 1000)
     },
-    login ({ commit, dispatch }, authData) {
+    login ({ commit, dispatch, state }, authData) {
       axiosInstance.post('/verifyPassword?key=AIzaSyDlZZACAOgFTyjEsasxd-jSFIOFT0AR3FI', {
         email: authData.email,
         password: authData.password,
         returnSecureToken: true
       })
         .then(res => {
-          console.log(res)
           commit('authUser', {
             token: res.data.idToken,
             userId: res.data.localId
@@ -229,6 +231,7 @@ export default new Vuex.Store({
           localStorage.setItem('expDate', expDate)
           localStorage.setItem('userId', res.data.localId)
           dispatch('setLogoutTimer', res.data.expiresIn)
+          dispatch('fetchUser')
         })
         .catch(error => console.log(error))
     },
@@ -247,6 +250,24 @@ export default new Vuex.Store({
         token,
         userId
       })
+    },
+    fetchUser ({ commit, state }) {
+      if (!state.idToken) {
+        return
+      }
+      axios.get('/users.json' + '?auth=' + state.idToken)
+        .then(res => {
+          const data = res.data
+          const users = []
+          for (let key in data) {
+            const user = data[key]
+            user.id = key
+            users.push(user)
+          }
+          commit('storeUser', users[0])
+        })
+        .catch(error => console.log(error))
     }
+
   }
 })

@@ -4,19 +4,10 @@
       <h1 class="text-xs-center">Signup</h1>
 
       <v-flex>
-        <form class="signup-form">
+        <form class="signup-form pa-3 pt-4 mt-4">
           <v-layout row wrap>
-            <v-flex xs6 px-3>
-              <v-text-field label="Your Name *"
-                            type="text"
-                            color="#37474F"
-                            v-model="$v.name.$model"
-                            :class="{'error-field': $v.name.$error}"/>
-              <p v-if="!$v.name.required && $v.name.$error"
-                 class="error-message">Name is required</p>
-            </v-flex>
 
-            <v-flex xs6 px-3>
+            <v-flex xs12 px-3>
               <v-text-field label="Your Email *"
                             type="email"
                             color="#37474F"
@@ -28,7 +19,7 @@
                  class="error-message">Email is invalid</p>
             </v-flex>
 
-            <v-flex xs6 px-3>
+            <v-flex xs12 px-3>
               <v-text-field label="Your Password *"
                             type="password"
                             color="#37474F"
@@ -40,7 +31,7 @@
                  class="error-message">Password should be at least 6 characters</p>
             </v-flex>
 
-            <v-flex xs6 px-3>
+            <v-flex xs12 px-3>
               <v-text-field label="Confirm Password *"
                             type="password"
                             color="#37474F"
@@ -71,16 +62,12 @@ import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 export default {
   data () {
     return {
-      name: '',
       email: '',
       password: '',
       confirmPassword: ''
     }
   },
   validations: {
-    name: {
-      required
-    },
     email: {
       required,
       email
@@ -97,7 +84,6 @@ export default {
   methods: {
     signUp () {
       const signUpData = {
-        name: this.name,
         email: this.email,
         password: this.password
       }
@@ -108,3 +94,13 @@ export default {
 }
 
 </script>
+
+<style lang="scss" scoped>
+  @import "@/styles/variables.scss";
+
+  .signup-form {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid $blue-grey;
+  }
+</style>

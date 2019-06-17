@@ -4,17 +4,17 @@
       <h1 class="text-xs-center">Login</h1>
 
       <v-flex>
-        <form class="signup-form">
+        <form class="login-form pa-3 pt-4 mt-4">
           <v-layout row wrap>
 
-            <v-flex xs6 px-3>
+            <v-flex xs12 px-3>
               <v-text-field label="Your Email *"
                             type="email"
                             color="#37474F"
                             v-model="email"/>
             </v-flex>
 
-            <v-flex xs6 px-3>
+            <v-flex xs12 px-3>
               <v-text-field label="Your Password *"
                             type="password"
                             color="#37474F"
@@ -51,3 +51,13 @@
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "@/styles/variables.scss";
+
+  .login-form {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid $blue-grey;
+  }
+</style>
