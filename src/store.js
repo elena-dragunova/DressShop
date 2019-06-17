@@ -111,7 +111,6 @@ export default new Vuex.Store({
       state.userId = userData.userId
     },
     storeUser (state, user) {
-      console.log(user)
       state.user = user
     },
     clearAuthData (state) {
