@@ -81,8 +81,11 @@ export default {
       this.quantity--
     },
     addToCart () {
-      let cartItem = Object.create(this.catalogItem)
+      let cartItem = Object.create({})
 
+      cartItem.id = this.catalogItem.id
+      cartItem.name = this.catalogItem.name
+      cartItem.price = this.catalogItem.price
       cartItem.quantity = this.quantity
       cartItem.size = this.chosenSize
       cartItem.sumPrice = this.catalogItem.price * this.quantity
