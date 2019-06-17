@@ -28,10 +28,14 @@
     <v-btn class="hidden-xs-only" flat>
       <router-link to="/about" class="link-btn">About</router-link>
     </v-btn>
-    <v-btn class="hidden-xs-only" flat>
+    <v-btn v-if="!isAuth"
+           class="hidden-xs-only"
+           flat >
       <router-link to="/login" class="link-btn">Login</router-link>
     </v-btn>
-    <v-btn class="hidden-xs-only" flat>
+    <v-btn v-if="!isAuth"
+           class="hidden-xs-only"
+           flat>
       <router-link to="/signup" class="link-btn">Signup</router-link>
     </v-btn>
     <v-btn class="hidden-xs-only cart-btn" flat>
@@ -49,6 +53,9 @@ export default {
   computed: {
     categories () {
       return this.$store.getters.getCategories
+    },
+    isAuth () {
+      return this.$store.getters.isAuthenticated
     }
   },
   methods: {

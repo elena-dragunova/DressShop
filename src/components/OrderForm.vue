@@ -3,6 +3,7 @@
     <v-layout row wrap>
       <v-flex xs6 px-3>
         <v-text-field label="Your Name *"
+                      type="text"
                       color="#37474F"
                       v-model="$v.name.$model"
                       :class="{'error-field': $v.name.$error}"/>
@@ -12,6 +13,7 @@
 
       <v-flex xs6 px-3>
         <v-text-field label="Your Email *"
+                      type="email"
                       color="#37474F"
                       v-model="$v.email.$model"
                       :class="{'error-field': $v.email.$error}"/>
@@ -23,6 +25,7 @@
 
       <v-flex xs6 px-3>
         <v-text-field label="Your Phone *"
+                      type="tel"
                       color="#37474F"
                       v-model="$v.phone.$model"
                       :return-masked-value="true"
@@ -36,6 +39,7 @@
 
       <v-flex xs6 px-3>
         <v-text-field label="Your Address *"
+                      type="text"
                       color="#37474F"
                       v-model="$v.address.$model"
                       :class="{'error-field': $v.address.$error}"/>

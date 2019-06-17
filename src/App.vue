@@ -22,6 +22,7 @@ export default {
   },
   created () {
     this.$store.dispatch('getCatalogItems')
+    this.$store.dispatch('tryAutoLogin')
   }
 }
 </script>
